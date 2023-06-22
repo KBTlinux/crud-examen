@@ -34,9 +34,18 @@ function desconectar($conexion)
         mysqli_close($conexion);
     }
 }
+// Cargamos reservas
+function cargarReservas($conexion)
+{
+    $sql = "SELECT * FROM reservas";
+    $resultado = mysqli_query($conexion, $sql);
+    $tabla = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+    return $tabla;
+}
 
 // Probamos la conexión
 $conexion = conectar("localhost", "root", "root", "islantilla");
+$tabla = cargarReservas($conexion);
 ?>
 
 
@@ -90,18 +99,47 @@ $conexion = conectar("localhost", "root", "root", "islantilla");
         <br><br>
 
         <section class="row">
-            <h2 class="col-6 bg-info rounded-pill text-white">Formulario</h2>
-            <hr>
-            <form class="col-9 bg-light p-3 rounded alert alert-info" method="post" action="#">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" name="nombre" id="nombre" class="form-control">
-                <hr>
-                <input type="submit" value="Enviar Formulario" name="enviar" class="btn btn-primary">
-            </form>
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Cliente</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Habitación</th>
+                        <th>Pagado</th>
+                        <th>Importe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($tabla as $fila) {
+                        echo "<tr>";
+                        echo "<td>" . $fila['id'] . "</td>";
+                        echo "<td>" . $fila['cliente'] . "</td>";
+                        echo "<td>" . $fila['entrada'] . "</td>";
+                        echo "<td>" . $fila['salida'] . "</td>";
+                        echo "<td>" . $fila['habitacion'] . "</td>";
+                        echo "<td>" . $fila['pagado'] . "</td>";
+                        echo "<td>" . $fila['importe'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+
+
+
+
+
+
+
+                </tbody>
+            </table>
         </section>
         <hr>
         <nav>
-            <p><a href="#" class="btn btn-success mt-4">Ir a Página</a></p>
+            <p><a href="menu.php" class="btn btn-success mt-4">Ir a Menú</a></p>
+            <p><a href="islantilla.php" class="btn btn-success mt-4">Instalar BBDD</a></p>
+
         </nav>
     </main>
 
