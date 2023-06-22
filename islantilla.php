@@ -14,10 +14,10 @@ ini_set('display_startup_errors', 1);
 
 <?php
 // Zona de Funciones y Clases
-function conectar($servidor, $usuario, $clave, $bbdd)
+function conectar($servidor, $usuario, $clave)
 {
     // Creamos la conexión
-    $conexion = mysqli_connect($servidor, $usuario, $clave, $bbdd);
+    $conexion = mysqli_connect($servidor, $usuario, $clave);
     // Si Conexión-> TRUE, todo correcto!
     // Si Conexión-> FALSE, error!
     if (!$conexion) {
@@ -36,7 +36,7 @@ function desconectar($conexion)
 }
 
 // Probamos la conexión
-$conexion = conectar("localhost", "root", "root", "islantilla");
+$conexion = conectar("localhost", "root", "root");
 
 function instalar($conexion, $archivo)
 {
@@ -76,7 +76,7 @@ function instalar($conexion, $archivo)
 
     <?php
     /* Logica de la página o Hilo Principal*/
-    $mensaje = "Pulsa crear para cargar la BBDD";
+    $mensaje = "Pulsa CREAR para cargar la BBDD";
     if (isset($_REQUEST['enviar'])) {
         $resultado = instalar($conexion, "examen.sql");
         if($resultado){
