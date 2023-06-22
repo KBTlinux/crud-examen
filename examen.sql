@@ -6,7 +6,7 @@ USE islantilla;
 
 
 CREATE TABLE reservas(
-    Id INT(2) NOT NULL AUTO_INCREMENT,
+    Id TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
     cliente VARCHAR(50) NOT NULL,
     entrada date NOT NULL,
     salida date NOT NULL,
